@@ -45,4 +45,25 @@ export const useStyles = makeStyles((theme) => ({
   toolbarTitle: {
     flexGrow: 1,
   },
+  link: {
+    margin: "1rem",
+  },
+  main: {
+    padding: "1rem",
+  },
+  large: {
+    maxWidth: "50rem",
+    width: "100%",
+  },
+  mt1: {
+    marginTop: "1rem !important",
+  },
+  p1: {
+    padding: "1rem !important",
+  },
+  formControl: {
+    // margin: theme.spacing(1),
+    minWidth: "120",
+    width: "100%",
+  },
 }));

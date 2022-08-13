@@ -53,12 +53,13 @@ export default function Layout({
             <nav>
               <NextLink href="/cart">
                 <Link
-                  variant="button"
+                  variant="h6"
                   color="inherit"
                   href="/cart"
                   className={classes.link}
-                />
-                Cart
+                >
+                  Cart
+                </Link>
               </NextLink>
             </nav>
           </Toolbar>

@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styled-engine";
 export const theme = createTheme({
   //kieu chu~
   typography: {
@@ -51,8 +51,8 @@ export const useStyles = makeStyles((theme) => ({
   main: {
     padding: "1rem",
   },
-  large: {
-    maxWidth: "50rem",
+  largeImage: {
+    maxWidth: "40rem",
     width: "100%",
   },
   mt1: {
@@ -62,7 +62,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: "1rem !important",
   },
   formControl: {
-    // margin: theme.spacing(1),
+    // margin: "5px",
     minWidth: "120",
     width: "100%",
   },

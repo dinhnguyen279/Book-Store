@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import {
-  Alert,
+  // Alert,
   Grid,
   Card,
   CardActionArea,
@@ -9,11 +9,11 @@ import {
   Typography,
   Box,
   Slide,
-  Link,
+  // Link,
 } from "@mui/material";
-// import Link from "next/link";
+import Alert from "@mui/lab";
+import Link from "next/link";
 import Layout from "../components/Layout";
-import styles from "../styles/Home.module.css";
 import getCommerce from "../utils/commerce";
 export default function Home(props) {
   const { products } = props;
@@ -26,7 +26,6 @@ export default function Home(props) {
             <Slide direction="up" in={true}>
               <Card>
                 <Link href={`/products/${pro.permalink}`}>
-                  {/* <Link href="/about"> */}
                   <CardActionArea>
                     <CardMedia
                       component="img"
@@ -57,11 +56,6 @@ export default function Home(props) {
               </Card>
             </Slide>
           </Grid>
-          // <div key={pro.id}>
-          //   <img src={pro.image.url} alt={pro.name} />
-          //   <p>{pro.name}</p>
-          //   <p>{pro.price.formatted_with_symbol}</p>
-          // </div>
         ))}
       </Grid>
     </Layout>

@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <StoreProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </StoreProvider>
   );
 }
@@ -29,7 +29,7 @@ export default MyApp;
 MyApp.getInitialProps = async () => {
   return {
     pageProps: {
-      commercePubliKey: process.env.COMMERCE_PUBLIC_KEY,
+      commercePublicKey: process.env.COMMERCE_PUBLIC_KEY,
     },
   };
 };

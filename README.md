@@ -51,8 +51,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     5. proceed to checkout
 
 11. Create Checkout Screen
-12. Create checkout form and order summary columns
-13. create steppers to make a wizard
-14. add customer details inputs
-15. add Shipping details inputs
-16. add Payment information inputs
+
+    1. Create checkout form and order summary columns
+    2. create steppers to make a wizard
+    3. add customer details inputs
+    4. add Shipping details inputs
+    5. add Payment information inputs
+
+12. Implement checkout actions
+    1. Create Order
+    2. Show error on creating order
+    3. Set order in Context
+    4. Redirect user to confirmation screen on success

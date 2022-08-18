@@ -1,18 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import {
   Grid,
   Card,
   Typography,
-  Slide,
-  Link,
-  Alert,
   CircularProgress,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
   Select,
   MenuItem,
   Button,
@@ -26,6 +18,7 @@ import {
   TextField,
   FormControl,
   InputLabel,
+  Alert,
 } from "@mui/material";
 import { useContext } from "react";
 import dynamic from "next/dynamic";
@@ -33,10 +26,7 @@ import Layout from "../components/Layout";
 import { Store } from "../components/Store";
 import getCommerce from "../utils/commerce";
 import { useStyles } from "../utils/styles";
-import {
-  CART_RETRIEVE_REQUEST,
-  CART_RETRIEVE_SUCCESS,
-} from "../utils/constants";
+import { CART_RETRIEVE_SUCCESS, ORDER_SET } from "../utils/constants";
 import Router from "next/router";
 
 const dev = process.env.NODE_ENV === "development";
@@ -65,34 +55,33 @@ function Checkout(props) {
   };
 
   // Customer details
-  const [firstName, setFirstName] = useState(dev ? "Trần" : "");
-  const [lastName, setLastName] = useState(dev ? "Đinh Nguyễn" : "");
-  const [email, setEmail] = useState(dev ? "tdinhnguyen279@gmail.com" : "");
+  const [firstName, setFirstName] = useState(dev ? "Dinh" : "");
+  const [lastName, setLastName] = useState(dev ? "Nguyen" : "");
+  const [email, setEmail] = useState(dev ? "tdinhnguyen@gmail.com" : "");
 
   // Shipping details
-  const [shippingName, setShippingName] = useState(
-    dev ? "Trần Đinh Nguyễn" : ""
-  );
+  const [shippingName, setShippingName] = useState(dev ? "Dinh Nguyen" : "");
   const [shippingStreet, setShippingStreet] = useState(
-    dev ? "123 Nguyễn Bá Tòng" : ""
+    dev ? "123 Nguyen Ba Tong" : ""
   );
+  // use zip_code tieu bang california
   const [shippingPostalZipCode, setShippingPostalZipCode] = useState(
-    dev ? "90909" : ""
+    dev ? "90001" : ""
   );
-  const [shippingCity, setShippingCity] = useState(dev ? "TP. Tây Ninh" : "");
+  const [shippingCity, setShippingCity] = useState(dev ? "Tay Ninh" : "");
   const [shippingStateProvince, setShippingStateProvince] = useState(
-    dev ? "Tỉnh Tây Ninh" : ""
+    dev ? "TN" : ""
   );
-  const [shippingCountry, setShippingCountry] = useState(dev ? "Việt Nam" : "");
+  const [shippingCountry, setShippingCountry] = useState(dev ? "Viet Nam" : "");
   const [shippingOption, setShippingOption] = useState({});
 
   //Payment details
-  const [cardNum, setCardNum] = useState(dev ? "1234 6789 1234 6789" : "");
+  const [cardNum, setCardNum] = useState(dev ? "4242 4242 4242 4242" : "");
   const [expMonth, setExpMonth] = useState(dev ? "11" : "");
-  const [expYear, setExpYear] = useState(dev ? "2022" : "");
+  const [expYear, setExpYear] = useState(dev ? "2023" : "");
   const [cvv, setCvv] = useState(dev ? "123" : "");
   const [billingPostalZipCode, setBillingPostalZipCode] = useState(
-    dev ? "123456" : ""
+    dev ? "90089" : ""
   );
 
   //Shipping and fulfillment:thực hiện data
@@ -111,14 +100,71 @@ function Checkout(props) {
   const handlerNext = () => {
     setActiveStep((prev) => prev + 1);
     if (activeStep === steps.length - 1) {
-      // handlerCaptureCheckout();
+      handlerCaptureCheckout();
     }
   };
-  const [error, setError] = useState([]);
+  //Kiem tra don hang
+
+  const handlerCaptureCheckout = async () => {
+    const orderData = {
+      // line_items: checkoutToken.live.line_items,
+      line_items: checkoutToken.live,
+      customer: {
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+      },
+      shipping: {
+        name: shippingName,
+        street: shippingStreet,
+        town_city: shippingCity,
+        country_state: shippingStateProvince,
+        // postal_zip_code: shippingPostalZipCode,
+        country: shippingCountry,
+      },
+      fulfillment: {
+        shipping_method: shippingOption,
+      },
+      payment: {
+        gateway: "test_gateway",
+        card: {
+          number: cardNum,
+          expiry_month: expMonth,
+          expiry_year: expYear,
+          cvc: cvv,
+          postal_zip_code: billingPostalZipCode,
+        },
+      },
+    };
+    const commerce = getCommerce(props.commercePublicKey);
+    try {
+      const order = await commerce.checkout.capture(
+        checkoutToken.id,
+        orderData
+      );
+      dispatch({ type: ORDER_SET, payload: order });
+      localStorage.setItem("order_receipt", JSON.stringify(order));
+      await refreshCart();
+      Router.push("/confirmation");
+    } catch (err) {
+      const errList = [err.data.error.message];
+      const errs = err.data.error.errors;
+      for (const index in errs) {
+        errList.push(`${index}: ${errs[index]}`);
+      }
+      setErrors(errList);
+    }
+  };
+  const refreshCart = async () => {
+    const commerce = getCommerce(props.commercePublicKey);
+    const newCart = await commerce.cart.refresh();
+    dispatch({ type: CART_RETRIEVE_SUCCESS, payload: newCart });
+  };
+  const [errors, setErrors] = useState([]);
   const [checkoutToken, setCheckoutToken] = useState({});
 
   const handlerBack = () => {
-    setError([]);
+    setErrors([]);
     setActiveStep((prev) => prev - 1);
   };
 
@@ -132,7 +178,7 @@ function Checkout(props) {
   const fetchShippingCountries = async (checkoutTokenId) => {
     const commerce = getCommerce(props.commercePublicKey);
     const countries = await commerce.services.localeListShippingCountries(
-      checkoutToken
+      checkoutTokenId
     );
     setShippingCountries(countries.countries);
   };
@@ -256,8 +302,8 @@ function Checkout(props) {
               required
               fullWidth
               id="shippingPostalZipCode"
-              label="ShippingPostalZipCode"
-              name="shippingPostalZipCode"
+              label="Postal/Zip Code"
+              name="postalCode"
               onChange={(e) => setShippingPostalZipCode(e.target.value)}
               value={shippingPostalZipCode}
             />
@@ -270,8 +316,9 @@ function Checkout(props) {
                 id="shippingCountry"
                 label="Country"
                 fullWidth
-                value={shippingCountry}
                 onChange={handlerShippingCountryChange}
+                value={shippingCountry}
+                className={classes.mt1}
               >
                 {Object.keys(shippingCountries).map((idx) => (
                   <MenuItem value={idx} key={idx}>
@@ -289,10 +336,10 @@ function Checkout(props) {
                 labelId="shippingStateProvince-label"
                 id="shippingStateProvince"
                 label="ShippingStateProvince"
-                onChange={handlerSubdivisionChange}
                 fullWidth
-                value={shippingStateProvince}
                 required
+                value={shippingStateProvince}
+                onChange={handlerSubdivisionChange}
                 className={classes.mt1}
               >
                 {Object.keys(shippingSubdivisions).map((idx) => (
@@ -332,7 +379,7 @@ function Checkout(props) {
               required
               fullWidth
               id="cardNum"
-              label="Card Numbẻ"
+              label="Card Number"
               name="cardNum"
               onChange={(e) => setCardNum(e.target.value)}
               value={cardNum}
@@ -343,7 +390,7 @@ function Checkout(props) {
               required
               fullWidth
               id="expMonth"
-              label="Exp Month"
+              label="Expiry Month"
               name="expMonth"
               onChange={(e) => setExpMonth(e.target.value)}
               value={expMonth}
@@ -354,7 +401,7 @@ function Checkout(props) {
               required
               fullWidth
               id="expYear"
-              label="Exp Year"
+              label="Expiry Year"
               name="expYear"
               onChange={(e) => setExpYear(e.target.value)}
               value={expYear}
@@ -376,7 +423,7 @@ function Checkout(props) {
               required
               fullWidth
               id="billingPostalZipCode"
-              label="CVV"
+              label="ZipCode"
               name="billingPostalZipCode"
               onChange={(e) => setBillingPostalZipCode(e.target.value)}
               value={billingPostalZipCode}
@@ -407,25 +454,30 @@ function Checkout(props) {
                   ))}
                 </Stepper>
                 <Box>
-                  {activeStep === steps.length > 0 ? (
-                    error && error.length > 0 ? (
+                  {activeStep === steps.length ? (
+                    errors && errors.length > 0 ? (
                       <Box>
                         <List>
-                          {error.map((error) => (
+                          {errors.map((error) => (
                             <ListItem key={error}>
                               <Alert severity="error">{error}</Alert>
                             </ListItem>
                           ))}
                         </List>
                         <Box className={classes.mt1}>
-                          <Button onClick={handlerBack}>Back</Button>
+                          <Button
+                            onClick={handlerBack}
+                            className={classes.button}
+                          >
+                            Back
+                          </Button>
                         </Box>
                       </Box>
                     ) : (
                       <Box>
                         <CircularProgress />
                         <Typography className={classes.instructions}>
-                          Confirming Order
+                          Confirming Order...
                         </Typography>
                       </Box>
                     )
@@ -467,7 +519,7 @@ function Checkout(props) {
                   <ListItem key={lineItem.id}>
                     <Grid container>
                       <Grid item xs={6}>
-                        {lineItem.quantity} x {lineItem.name}
+                        {lineItem.name} x {lineItem.quantity}
                       </Grid>
                       <Grid item xs={6}>
                         <Typography align="right">

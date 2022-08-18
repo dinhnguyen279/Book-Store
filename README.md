@@ -32,3 +32,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+9. implement add to cart action
+
+   1. Check cart line items
+   2. add or update item inthe cart
+   3. Redirect t0 / cart
+   4. show cart menu on header
+   5. create CART_RETRIEVE actions
+   6. show cart items in header
+
+10. Create cart screen
+
+    1. add cart items columns
+    2. add cart sumary columns
+    3. update cart item
+    4. remove cart item
+    5. proceed to checkout
+
+11. Create Checkout Screen
+12. Create checkout form and order summary columns
+13. create steppers to make a wizard
+14. add customer details inputs
+15. add Shipping details inputs
+16. add Payment information inputs

@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import {
-  // Alert,
   Grid,
   Card,
   Typography,
@@ -11,25 +10,49 @@ import {
   Select,
   MenuItem,
   Button,
+  Alert,
 } from "@mui/material";
-import Alert from "@mui/lab";
 import Layout from "../../components/Layout";
 import getCommerce from "../../utils/commerce";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useStyles } from "../../utils/styles";
+import { Store } from "../../components/Store";
+import {
+  CART_RETRIEVE_REQUEST,
+  CART_RETRIEVE_SUCCESS,
+} from "../../utils/constants";
+import Router from "next/router";
 
 export default function Product(props) {
-  const [quantity, setQuantity] = useState(1);
   const { product } = props;
+  const [quantity, setQuantity] = useState(1);
 
   const classes = useStyles();
 
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
   const addToCartHandler = async () => {
-    console.log("Todo: add to cart");
+    const commerce = getCommerce(props.commercePublicKey);
+    const lineItem = cart.data?.line_items.find(
+      (x) => x.product_id === product.id
+    );
+
+    if (lineItem) {
+      const cartData = await commerce.cart.update(lineItem.id, {
+        quantity: quantity,
+      });
+      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
+      Router.push("/cart");
+    } else {
+      const cartData = await commerce.cart.add(product.id, quantity);
+      dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
+      Router.push("/cart");
+    }
   };
   return (
-    <Layout title="Home" commercePublicKey={props.commercePublicKey}>
-      <Slide direction="up" in={true}>
+    <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
+      <Slide direction="down" in={true}>
         <Grid container sapcing={1}>
           <Grid item md={6}>
             <img
@@ -38,7 +61,7 @@ export default function Product(props) {
               className={classes.largeImage}
             />
           </Grid>
-          <Grid item md={3} xs={12}>
+          <Grid item md={6} xs={12}>
             <List>
               <ListItem>
                 <Typography
@@ -57,7 +80,11 @@ export default function Product(props) {
               </ListItem>
             </List>
           </Grid>
-          <Grid item md={3} xs={12}>
+        </Grid>
+      </Slide>
+      <Slide direction="up" in={true}>
+        <Grid container spacing={1}>
+          <Grid item md={6} xs={12}>
             <Card>
               <List>
                 <ListItem>
@@ -76,7 +103,8 @@ export default function Product(props) {
                       Status
                     </Grid>
                     <Grid item xs={6}>
-                      {product.quantity > 0 ? (
+                      {/* {product.quantity > 0 ? ( */}
+                      {quantity > 0 ? (
                         <Alert icon={false} severity="success">
                           In Stock
                         </Alert>
@@ -88,41 +116,45 @@ export default function Product(props) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {product.quantity > 0 && (
-                    <>
-                      <ListItem>
-                        <Grid container justifyContent="flex-end">
-                          <Grid item xs={6}>
-                            <Select
-                              labelId="quantity-label"
-                              id="quantity"
-                              fullWidth
-                              onChange={(e) => setQuantity(e.target.value)}
-                              value={quantity}
-                            >
-                              {[...Array(product.quantity).keys()].map((x) => (
-                                <MenuItem key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </MenuItem>
-                              ))}
-                            </Select>
-                          </Grid>
+                {/* {product.quantity > 0 && ( */}
+                {quantity > 0 && (
+                  <>
+                    <ListItem>
+                      <Grid container justifyContent="flex-end">
+                        <Grid item xs={6}>
+                          Quantity
                         </Grid>
-                      </ListItem>
-                      <ListItem>
-                        <Button
-                          type="button"
-                          fullWidth
-                          variant="contained"
-                          color="primary"
-                          onLick={addToCartHandler}
-                        >
-                          Add To Cart
-                        </Button>
-                      </ListItem>
-                    </>
-                  ) &&
-                  console.log(product.quantity)}
+                        <Grid item xs={6}>
+                          <Select
+                            labelId="quanitity-label"
+                            id="quanitity"
+                            fullWidth
+                            onChange={(e) => setQuantity(e.target.value)}
+                            value={quantity}
+                          >
+                            {/* {[...Array(product.quantity).keys()].map((x) => ( */}
+                            {[...Array(100).keys()].map((x) => (
+                              <MenuItem key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                    <ListItem>
+                      <Button
+                        type="button"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        onClick={addToCartHandler}
+                      >
+                        Add To Cart
+                      </Button>
+                    </ListItem>
+                  </>
+                )}
               </List>
             </Card>
           </Grid>
@@ -131,7 +163,7 @@ export default function Product(props) {
     </Layout>
   );
 }
-
+// bởi vì dùng id trong url nên dùng getServerSideProps
 export async function getServerSideProps({ params }) {
   const { id } = params;
   const commerce = getCommerce();

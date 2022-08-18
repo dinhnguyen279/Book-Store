@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import {
-  // Alert,
   Grid,
   Card,
   CardActionArea,
@@ -9,10 +8,11 @@ import {
   Typography,
   Box,
   Slide,
-  // Link,
+  Link,
+  Alert,
 } from "@mui/material";
-import Alert from "@mui/lab";
-import Link from "next/link";
+// import Alert from "@mui/lab";
+// import Link from "next/link";
 import Layout from "../components/Layout";
 import getCommerce from "../utils/commerce";
 export default function Home(props) {
@@ -35,7 +35,7 @@ export default function Home(props) {
                   </CardActionArea>
                   <CardContent>
                     <Typography
-                      gutterBottom
+                      // gutterButton
                       variant="body2"
                       color="GrayText"
                       component="p"

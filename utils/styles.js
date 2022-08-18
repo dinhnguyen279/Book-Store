@@ -1,5 +1,6 @@
+import { Directions } from "@mui/icons-material";
 import { createTheme } from "@mui/material";
-import { makeStyles } from "@mui/styled-engine";
+import { makeStyles } from "@mui/styles";
 export const theme = createTheme({
   //kieu chu~
   typography: {
@@ -38,6 +39,8 @@ export const theme = createTheme({
 export const useStyles = makeStyles((theme) => ({
   AppBar: {
     borderBottom: `1px solid ${theme.divider}`,
+    // borderBottom: `1px solid ${theme}`,
+    display: "flex",
   },
   toolbar: {
     flexWrap: "wrap",
@@ -47,9 +50,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   link: {
     margin: "1rem",
+    justifyContent: "space-between",
   },
   main: {
     padding: "1rem",
+    paddingTop: "5rem",
   },
   largeImage: {
     maxWidth: "40rem",
@@ -62,8 +67,9 @@ export const useStyles = makeStyles((theme) => ({
     padding: "1rem !important",
   },
   formControl: {
-    // margin: "5px",
+    margin: "5px",
     minWidth: "120",
     width: "100%",
   },
+  card: {},
 }));

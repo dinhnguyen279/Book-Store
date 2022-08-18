@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   CssBaseline,
   ThemeProvider,
@@ -8,22 +8,42 @@ import {
   Container,
   Box,
   Typography,
+  CircularProgress,
+  Badge,
 } from "@mui/material";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
 import NextLink from "next/link";
+import getCommerce from "../utils/commerce";
+import { Store } from "./Store";
+import {
+  CART_RETRIEVE_REQUEST,
+  CART_RETRIEVE_SUCCESS,
+} from "../utils/constants";
 
 export default function Layout({
   children,
   commercePublicKey,
-  title = "CoolShop",
+  title = "CarShop",
 }) {
   const classes = useStyles();
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+  useEffect(() => {
+    const fetchCart = async () => {
+      const commerce = getCommerce(commercePublicKey);
+      dispatch({ type: CART_RETRIEVE_REQUEST });
+      const cartData = await commerce.cart.retrieve();
+      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData });
+    };
+    fetchCart();
+  }, []);
+
   return (
     <React.Fragment>
       <Head>
         <meta charSet="utf-8" />
-        <title>{`${title} - CoolShop`}</title>
+        <title>{`${title} - DinhNguyenShop`}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
@@ -35,7 +55,7 @@ export default function Layout({
         <AppBar
           position="static"
           color="default"
-          elevation={0}
+          elevation={10}
           className={classes.AppBar}
         >
           <Toolbar className={classes.toolbar}>
@@ -47,7 +67,7 @@ export default function Layout({
                 href="/"
                 className={classes.toolbarTitle}
               >
-                CoolShop
+                DinhNguyenShop
               </Link>
             </NextLink>
             <nav>
@@ -58,7 +78,18 @@ export default function Layout({
                   href="/cart"
                   className={classes.link}
                 >
-                  Cart
+                  {cart.loading ? (
+                    <CircularProgress />
+                  ) : cart.data?.total_items > 0 ? (
+                    <Badge
+                      badgeContent={cart.data?.total_items}
+                      color="primary"
+                    >
+                      Cart
+                    </Badge>
+                  ) : (
+                    "Cart"
+                  )}
                 </Link>
               </NextLink>
             </nav>

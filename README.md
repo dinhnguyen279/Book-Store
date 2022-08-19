@@ -63,3 +63,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     2. Show error on creating order
     3. Set order in Context
     4. Redirect user to confirmation screen on success
+13. Create order confirmation screen
+    1. Show order summary
+    2. Show order details

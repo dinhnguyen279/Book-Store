@@ -27,8 +27,8 @@ function Confirmation(props) {
 
   return (
     <Layout
-      title={"Order" + order.id}
-      // title="Order"
+      // title={"Order" + order.id}
+      title="Order"
       commercePublicKey={props.commercePublicKey}
     >
       {!order ? (
@@ -38,8 +38,8 @@ function Confirmation(props) {
       ) : (
         <React.Fragment>
           <Typography variant="h1" component="h1">
-            Order {order.id}
-            {/* Order */}
+            {/* Order {order.id} */}
+            Order
           </Typography>
           <Slide direction="up" in={true}>
             <Grid container spacing={1}>

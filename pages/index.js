@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import {
   Grid,
   Card,
@@ -11,10 +10,9 @@ import {
   Link,
   Alert,
 } from "@mui/material";
-// import Alert from "@mui/lab";
-// import Link from "next/link";
 import Layout from "../components/Layout";
 import getCommerce from "../utils/commerce";
+
 export default function Home(props) {
   const { products } = props;
   return (
@@ -34,20 +32,11 @@ export default function Home(props) {
                     />
                   </CardActionArea>
                   <CardContent>
-                    <Typography
-                      // gutterButton
-                      variant="body2"
-                      color="GrayText"
-                      component="p"
-                    >
+                    <Typography variant="body2" color="gray" component="p">
                       {pro.name}
                     </Typography>
                     <Box>
-                      <Typography
-                        variant="body1"
-                        color="GrayText"
-                        component="p"
-                      >
+                      <Typography variant="body1" color="gray" component="p">
                         {pro.price.formatted_with_symbol}
                       </Typography>
                     </Box>

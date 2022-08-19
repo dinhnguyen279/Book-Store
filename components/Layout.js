@@ -37,7 +37,8 @@ export default function Layout({
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData });
     };
     fetchCart();
-  }, []);
+    // }, []);
+  }, [commercePublicKey, dispatch]);
 
   return (
     <React.Fragment>

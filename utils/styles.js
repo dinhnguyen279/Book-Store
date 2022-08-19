@@ -1,4 +1,3 @@
-import { Directions } from "@mui/icons-material";
 import { createTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 export const theme = createTheme({
@@ -39,7 +38,6 @@ export const theme = createTheme({
 export const useStyles = makeStyles((theme) => ({
   AppBar: {
     borderBottom: `1px solid ${theme.divider}`,
-    // borderBottom: `1px solid ${theme}`,
     display: "flex",
   },
   toolbar: {
@@ -74,3 +72,42 @@ export const useStyles = makeStyles((theme) => ({
   card: {},
   instructions: {},
 }));
+// export const useStyles = makeStyles((theme) =>
+//   createStyles({
+//     AppBar: {
+//       borderBottom: `1px solid ${theme.divider}`,
+//       display: "flex",
+//     },
+//     toolbar: {
+//       flexWrap: "wrap",
+//     },
+//     toolbarTitle: {
+//       flexGrow: 1,
+//     },
+//     link: {
+//       margin: "1rem",
+//       justifyContent: "space-between",
+//     },
+//     main: {
+//       padding: "1rem",
+//       paddingTop: "5rem",
+//     },
+//     largeImage: {
+//       maxWidth: "40rem",
+//       width: "100%",
+//     },
+//     mt1: {
+//       marginTop: "1rem !important",
+//     },
+//     p1: {
+//       padding: "1rem !important",
+//     },
+//     formControl: {
+//       margin: "5px",
+//       minWidth: "120",
+//       width: "100%",
+//     },
+//     card: {},
+//     instructions: {},
+//   })
+// );

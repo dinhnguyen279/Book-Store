@@ -35,7 +35,7 @@ function Cart(props) {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
 
-  const removeFromCartHandler = async (lineItem) => {
+  const handlerRemoveFromCart = async (lineItem) => {
     const commerce = getCommerce(props.commercePublicKey);
     const cartData = await commerce.cart.remove(lineItem.id);
     dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
@@ -44,7 +44,7 @@ function Cart(props) {
   const quantityChangeHandler = async (lineItem, quantity) => {
     const commerce = getCommerce(props.commercePublicKey);
     const cartData = await commerce.cart.update(lineItem.id, {
-      quantity,
+      Quantity: quantity,
     });
     dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
   };
@@ -55,8 +55,8 @@ function Cart(props) {
   return (
     <Layout title="Cart" commercePublicKey={props.commercePublicKey}>
       {cart.loading ? (
-        <CircularProgress aria-busy={true} />
-      ) : cart.data?.line_items.length === 0 ? (
+        <CircularProgress />
+      ) : cart.data.line_items.length === 0 ? (
         <Alert icon={false} severity="error">
           Cart is empty. <Link href="/">Go shopping</Link>
         </Alert>
@@ -75,7 +75,7 @@ function Cart(props) {
                         <TableCell>Name</TableCell>
                         <TableCell align="right">Quantity</TableCell>
                         <TableCell align="right">Price</TableCell>
-                        <TableCell align="right">Action</TableCell>
+                        <TableCell align="right">Delete</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -105,7 +105,7 @@ function Cart(props) {
                           </TableCell>
                           <TableCell align="right">
                             <Button
-                              onClick={() => removeFromCartHandler(cartItem)}
+                              onClick={() => handlerRemoveFromCart(cartItem)}
                               variant="contained"
                               color="secondary"
                             >

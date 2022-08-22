@@ -17,7 +17,9 @@ export default function Home(props) {
   const { products } = props;
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
-      {products.lenght === 0 && <Alert>No product found</Alert>}
+      {products.lenght === 0 && (
+        <Alert severity="error">No product found</Alert>
+      )}
       <Grid container spacing={1}>
         {products.map((pro) => (
           <Grid key={pro.id} item md={3}>

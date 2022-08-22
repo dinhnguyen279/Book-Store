@@ -26,11 +26,7 @@ function Confirmation(props) {
   const { order } = state;
 
   return (
-    <Layout
-      // title={"Order" + order.id}
-      title="Order"
-      commercePublicKey={props.commercePublicKey}
-    >
+    <Layout title="Order" commercePublicKey={props.commercePublicKey}>
       {!order ? (
         <Alert icon={false} severity="error">
           No order found.
@@ -38,7 +34,6 @@ function Confirmation(props) {
       ) : (
         <React.Fragment>
           <Typography variant="h1" component="h1">
-            {/* Order {order.id} */}
             Order
           </Typography>
           <Slide direction="up" in={true}>

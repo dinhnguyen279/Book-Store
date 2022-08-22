@@ -13,7 +13,7 @@ const reducer = (state, action) => {
     case CART_RETRIEVE_REQUEST:
       return {
         ...state,
-        cart: { loading: true, data: action.payload },
+        cart: { loading: true },
       };
     case CART_RETRIEVE_SUCCESS:
       return {

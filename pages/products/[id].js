@@ -22,6 +22,7 @@ import {
   CART_RETRIEVE_SUCCESS,
 } from "../../utils/constants";
 import Router from "next/router";
+import { AddShoppingCart } from "@mui/icons-material";
 
 export default function Product(props) {
   const { product } = props;
@@ -39,30 +40,14 @@ export default function Product(props) {
     );
 
     if (lineItem) {
-      const cartData = await commerce.cart.update(lineItem.id, {
-        quantity: quantity,
-      });
+      const cartData = await commerce.cart.update(lineItem.id, quantity);
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
     } else {
       const cartData = await commerce.cart.add(product.id, quantity);
       dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
     }
   };
-  const nextCart = async () => {
-    const commerce = getCommerce(props.commercePublicKey);
-    const lineItem = cart.data?.line_items.find(
-      (x) => x.product_id === product.id
-    );
-
-    if (lineItem) {
-      const cartData = await commerce.cart.update(lineItem.id, {
-        quantity: quantity,
-      });
-      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
-    } else {
-      const cartData = await commerce.cart.add(product.id, quantity);
-      dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
-    }
+  const nextCart = () => {
     Router.push("/cart");
   };
   return (
@@ -166,6 +151,7 @@ export default function Product(props) {
                             variant="contained"
                             color="secondary"
                             onClick={addToCartHandler}
+                            endIcon={<AddShoppingCart />}
                           >
                             Add To Cart
                           </Button>
@@ -178,7 +164,7 @@ export default function Product(props) {
                             color="primary"
                             onClick={nextCart}
                           >
-                            BUY
+                            Cart
                           </Button>
                         </Grid>
                       </Grid>

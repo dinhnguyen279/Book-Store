@@ -29,7 +29,7 @@ export default MyApp;
 MyApp.getInitialProps = async () => {
   return {
     pageProps: {
-      commercePublicKey: process.env.COMMERCE_PUBLIC_KEY,
+      commercePublicKey: process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY,
     },
   };
 };

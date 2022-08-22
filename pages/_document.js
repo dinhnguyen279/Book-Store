@@ -1,6 +1,5 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
-// import { ServeStyleSheets } from "@mui/material/styles";
 class MyDocument extends Document {
   render() {
     return (

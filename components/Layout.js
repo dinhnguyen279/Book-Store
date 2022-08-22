@@ -14,12 +14,17 @@ import {
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
 import NextLink from "next/link";
+import Image from "next/image";
+
 import getCommerce from "../utils/commerce";
 import { Store } from "./Store";
 import {
   CART_RETRIEVE_REQUEST,
   CART_RETRIEVE_SUCCESS,
 } from "../utils/constants";
+import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
+import Footer from "./Footer/footer";
+import logo from "../public/assets/logoNguyen.png";
 
 export default function Layout({
   children,
@@ -44,8 +49,8 @@ export default function Layout({
     <React.Fragment>
       <Head>
         <meta charSet="utf-8" />
-        <title>{`${title} - DinhNguyenShop`}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>{`${title} - Book Store`}</title>
+        <link rel="icon" href="logoNguyen.png" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1,shrink-to-fit=no"
@@ -55,20 +60,21 @@ export default function Layout({
         <CssBaseline />
         <AppBar
           position="static"
-          color="default"
+          color="secondary"
           elevation={10}
-          className={classes.AppBar}
+          className={classes.appBar}
         >
           <Toolbar className={classes.toolbar}>
             <NextLink href="/">
               <Link
-                variant="h6"
+                variant="h5"
                 color="inherit"
                 noWrap
                 href="/"
-                className={classes.toolbarTitle}
+                className={`${classes.toolbarTitle} ${classes.flexAppbar}`}
               >
-                DinhNguyenShop
+                <Image src={logo} alt="logo" width="50px" height="60px" />
+                BookShop
               </Link>
             </NextLink>
             <nav>
@@ -86,10 +92,10 @@ export default function Layout({
                       badgeContent={cart.data?.total_items}
                       color="primary"
                     >
-                      Cart
+                      <ShoppingCartTwoToneIcon />
                     </Badge>
                   ) : (
-                    "Cart"
+                    <ShoppingCartTwoToneIcon />
                   )}
                 </Link>
               </NextLink>
@@ -99,15 +105,9 @@ export default function Layout({
         <Container component="main" className={classes.main}>
           {children}
         </Container>
-        <Container component="footer" maxWidth="md">
-          <Box mt={5}>
-            <Typography variant="body2" color="GrayText" align="center">
-              {"@ "}
-              DinhNguyenShop 2022
-              {". "}
-            </Typography>
-          </Box>
-        </Container>
+        <Box mt={5}>
+          <Footer component="footer" maxWidth="md" />
+        </Box>
       </ThemeProvider>
     </React.Fragment>
   );

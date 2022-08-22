@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 export const theme = createTheme({
-  //kieu chu~
+  //kieu kiểu
   typography: {
     h1: {
       fontSize: "2.2rem",
@@ -19,7 +19,8 @@ export const theme = createTheme({
       margin: "1rem 0",
     },
   },
-  //bang? mau`
+  //Màu
+
   palette: {
     primary: {
       main: "#f0c000",
@@ -36,23 +37,25 @@ export const theme = createTheme({
   },
 });
 export const useStyles = makeStyles((theme) => ({
-  AppBar: {
+  appBar: {
     borderBottom: `1px solid ${theme.divider}`,
     display: "flex",
+    justifyContent: "space-between",
   },
   toolbar: {
     flexWrap: "wrap",
   },
   toolbarTitle: {
     flexGrow: 1,
+    textDecoration: "none",
   },
   link: {
     margin: "1rem",
     justifyContent: "space-between",
   },
   main: {
-    padding: "1rem",
-    paddingTop: "5rem",
+    padding: "2rem",
+    paddingTop: "8rem",
   },
   largeImage: {
     maxWidth: "40rem",
@@ -60,6 +63,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   mt1: {
     marginTop: "1rem !important",
+  },
+  mr1: {
+    marginRight: "1rem !important",
   },
   p1: {
     padding: "1rem !important",
@@ -71,6 +77,37 @@ export const useStyles = makeStyles((theme) => ({
   },
   card: {},
   instructions: {},
+  logo: {
+    // objectFit: "cover",
+    width: "10%",
+  },
+  footerLink: {
+    textDecoration: "none",
+  },
+
+  boxLink: {
+    cursor: "pointer",
+    "&:hover": {
+      borderBottom: "1px solid white",
+    },
+    display: "flex",
+  },
+  title: {
+    fontSize: "25px",
+  },
+  flexFooter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  flexAppbar: {
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+  },
+  bgFooter: {
+    background: "#208080",
+  },
 }));
 // export const useStyles = makeStyles((theme) =>
 //   createStyles({

@@ -43,12 +43,27 @@ export default function Product(props) {
         quantity: quantity,
       });
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
-      Router.push("/cart");
     } else {
       const cartData = await commerce.cart.add(product.id, quantity);
       dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
-      Router.push("/cart");
     }
+  };
+  const nextCart = async () => {
+    const commerce = getCommerce(props.commercePublicKey);
+    const lineItem = cart.data?.line_items.find(
+      (x) => x.product_id === product.id
+    );
+
+    if (lineItem) {
+      const cartData = await commerce.cart.update(lineItem.id, {
+        quantity: quantity,
+      });
+      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
+    } else {
+      const cartData = await commerce.cart.add(product.id, quantity);
+      dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
+    }
+    Router.push("/cart");
   };
   return (
     <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
@@ -143,15 +158,30 @@ export default function Product(props) {
                       </Grid>
                     </ListItem>
                     <ListItem>
-                      <Button
-                        type="button"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        onClick={addToCartHandler}
-                      >
-                        Add To Cart
-                      </Button>
+                      <Grid container spacing={1}>
+                        <Grid item xs={6}>
+                          <Button
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            color="secondary"
+                            onClick={addToCartHandler}
+                          >
+                            Add To Cart
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            onClick={nextCart}
+                          >
+                            BUY
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </ListItem>
                   </>
                 )}

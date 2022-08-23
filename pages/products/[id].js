@@ -38,7 +38,6 @@ export default function Product(props) {
     const lineItem = cart.data?.line_items.find(
       (x) => x.product_id === product.id
     );
-
     if (lineItem) {
       const cartData = await commerce.cart.update(lineItem.id, quantity);
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
@@ -49,9 +48,7 @@ export default function Product(props) {
       Router.push("/cart");
     }
   };
-  // const nextCart = () => {
-  //   Router.push("/cart");
-  // };
+
   return (
     <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
       <Slide direction="down" in={true}>

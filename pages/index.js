@@ -9,12 +9,16 @@ import {
   Slide,
   Link,
   Alert,
+  CardActions,
+  Button,
 } from "@mui/material";
 import Layout from "../components/Layout";
 import getCommerce from "../utils/commerce";
-
+import { AddShoppingCart } from "@mui/icons-material";
+import Router from "next/router";
 export default function Home(props) {
   const { products } = props;
+  // const addToCartHandler = () => Router.push("/cart");
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
       {products.lenght === 0 && (
@@ -22,9 +26,9 @@ export default function Home(props) {
       )}
       <Grid container spacing={1}>
         {products.map((pro) => (
-          <Grid key={pro.id} item md={4}>
+          <Grid key={pro.id} item md={4} xs={6} px={2} py={2}>
             <Slide direction="up" in={true}>
-              <Card>
+              <Card variant="elevation">
                 <Link href={`/products/${pro.permalink}`}>
                   <CardActionArea>
                     <CardMedia
@@ -34,7 +38,12 @@ export default function Home(props) {
                     />
                   </CardActionArea>
                   <CardContent>
-                    <Typography variant="body2" color="gray" component="p">
+                    <Typography
+                      gutterBottom
+                      variant="body2"
+                      color="gray"
+                      component="p"
+                    >
                       {pro.name}
                     </Typography>
                     <Box>
@@ -44,6 +53,18 @@ export default function Home(props) {
                     </Box>
                   </CardContent>
                 </Link>
+                {/* <CardActions>
+                  <Button
+                    type="button"
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    onClick={addToCartHandler}
+                    endIcon={<AddShoppingCart />}
+                  >
+                    Add To Cart
+                  </Button>
+                </CardActions> */}
               </Card>
             </Slide>
           </Grid>

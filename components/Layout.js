@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import {
   CssBaseline,
@@ -43,7 +44,7 @@ export default function Layout({
     };
     fetchCart();
     // }, []);
-  }, [commercePublicKey, dispatch]);
+  }, []);
 
   return (
     <React.StrictMode>

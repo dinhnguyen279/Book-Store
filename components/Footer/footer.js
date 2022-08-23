@@ -1,14 +1,13 @@
 import React from "react";
 import { Container, Grid, Box, Link, Typography } from "@mui/material";
-// import Image from "next/image";
-// import logo from "../../public/assets/logoNguyen.png";
+import { useStyles } from "../../utils/styles";
 import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
 import LocalPhoneTwoToneIcon from "@mui/icons-material/LocalPhoneTwoTone";
 import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
-import { useStyles } from "../../utils/styles";
 import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AlternateEmailTwoToneIcon from "@mui/icons-material/AlternateEmailTwoTone";
+
 const Footer = () => {
   const classes = useStyles();
   return (
@@ -28,7 +27,6 @@ const Footer = () => {
                   color="inherit"
                   className={`${classes.footerLink} ${classes.flexFooter} `}
                 >
-                  {/* <Image src={logo} alt="logo" width="50px" height="60px" /> */}
                   BOOK-STORE
                 </Link>
               </Box>

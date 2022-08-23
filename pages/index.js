@@ -22,7 +22,7 @@ export default function Home(props) {
       )}
       <Grid container spacing={1}>
         {products.map((pro) => (
-          <Grid key={pro.id} item md={3}>
+          <Grid key={pro.id} item md={4}>
             <Slide direction="up" in={true}>
               <Card>
                 <Link href={`/products/${pro.permalink}`}>
@@ -38,7 +38,7 @@ export default function Home(props) {
                       {pro.name}
                     </Typography>
                     <Box>
-                      <Typography variant="body1" color="gray" component="p">
+                      <Typography variant="h2" color="gray" component="p">
                         {pro.price.formatted_with_symbol}
                       </Typography>
                     </Box>

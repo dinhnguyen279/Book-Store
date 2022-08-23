@@ -56,7 +56,7 @@ function Cart(props) {
     <Layout title="Cart" commercePublicKey={props.commercePublicKey}>
       {cart.loading ? (
         <CircularProgress />
-      ) : cart.data.line_items.length === 0 ? (
+      ) : cart.data?.line_items.length === 0 ? (
         <Alert icon={false} severity="error">
           Cart is empty. <Link href="/">Go shopping</Link>
         </Alert>

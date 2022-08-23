@@ -12,7 +12,7 @@ import {
   Badge,
   IconButton,
   ///
-  Grid,
+  // Grid,
 } from "@mui/material";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
@@ -25,15 +25,15 @@ import {
   CART_RETRIEVE_SUCCESS,
 } from "../utils/constants";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
-// import Footer from "./Footer/footer";
+import Footer from "./Footer/footer";
 import logo from "../public/assets/logoNguyen.png";
 ////
-import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import AlternateEmailTwoToneIcon from "@mui/icons-material/AlternateEmailTwoTone";
-import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
-import LocalPhoneTwoToneIcon from "@mui/icons-material/LocalPhoneTwoTone";
-import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
+// import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
+// import GitHubIcon from "@mui/icons-material/GitHub";
+// import AlternateEmailTwoToneIcon from "@mui/icons-material/AlternateEmailTwoTone";
+// import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
+// import LocalPhoneTwoToneIcon from "@mui/icons-material/LocalPhoneTwoTone";
+// import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
 export default function Layout({
   children,
   commercePublicKey,
@@ -59,7 +59,7 @@ export default function Layout({
         <Head>
           <meta charSet="utf-8" />
           <title>{`${title} - Book Store`}</title>
-          <link rel="icon" href={logo} />
+          {/* <link rel="icon" href={logo} /> */}
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1,shrink-to-fit=no"
@@ -121,10 +121,10 @@ export default function Layout({
           <Container component="main" className={classes.main}>
             {children}
           </Container>
-          {/* <Box mt={5}>
-            <Footer component="footer" maxWidth="md" />
-          </Box> */}
-          <Box color="white" className={classes.bgFooter} mt={5}>
+          <Box mt={5}>
+            <Footer component="footer" />
+          </Box>
+          {/* <Box color="white" className={classes.bgFooter} mt={5}>
             <Container>
               <Grid
                 container
@@ -138,9 +138,9 @@ export default function Layout({
                       href="/"
                       color="inherit"
                       className={`${classes.footerLink} ${classes.flexFooter} `}
-                    >
-                      {/* <Image src={logo} alt="logo" width="50px" height="60px" /> */}
-                      BOOK-STORE
+                    > */}
+          {/* <Image src={logo} alt="logo" width="50px" height="60px" /> */}
+          {/* BOOK-STORE
                     </Link>
                   </Box>
                   <Typography
@@ -233,7 +233,7 @@ export default function Layout({
                 </Grid>
               </Grid>
             </Container>
-          </Box>
+          </Box> */}
         </ThemeProvider>
       </>
     </React.StrictMode>

@@ -42,14 +42,16 @@ export default function Product(props) {
     if (lineItem) {
       const cartData = await commerce.cart.update(lineItem.id, quantity);
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
+      Router.push("/cart");
     } else {
       const cartData = await commerce.cart.add(product.id, quantity);
       dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
+      Router.push("/cart");
     }
   };
-  const nextCart = () => {
-    Router.push("/cart");
-  };
+  // const nextCart = () => {
+  //   Router.push("/cart");
+  // };
   return (
     <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
       <Slide direction="down" in={true}>
@@ -143,31 +145,16 @@ export default function Product(props) {
                       </Grid>
                     </ListItem>
                     <ListItem>
-                      <Grid container spacing={1}>
-                        <Grid item xs={6}>
-                          <Button
-                            type="button"
-                            fullWidth
-                            variant="contained"
-                            color="secondary"
-                            onClick={addToCartHandler}
-                            endIcon={<AddShoppingCart />}
-                          >
-                            Add To Cart
-                          </Button>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Button
-                            type="button"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            onClick={nextCart}
-                          >
-                            Cart
-                          </Button>
-                        </Grid>
-                      </Grid>
+                      <Button
+                        type="button"
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        onClick={addToCartHandler}
+                        endIcon={<AddShoppingCart />}
+                      >
+                        Add To Cart
+                      </Button>
                     </ListItem>
                   </>
                 )}

@@ -39,7 +39,9 @@ export default function Product(props) {
       (x) => x.product_id === product.id
     );
     if (lineItem) {
-      const cartData = await commerce.cart.update(lineItem.id, quantity);
+      const cartData = await commerce.cart.update(lineItem.id, {
+        Quantity: quantity,
+      });
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
       Router.push("/cart");
     } else {

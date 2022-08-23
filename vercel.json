@@ -1,3 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/products", "destination": "/[id].js" }],
+  "clearnUrls": true,
+  "trailingSlash": false
 }

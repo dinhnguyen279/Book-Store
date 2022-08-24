@@ -11,6 +11,8 @@ import {
   MenuItem,
   Button,
   Alert,
+  CardMedia,
+  CardActionArea,
 } from "@mui/material";
 import Layout from "../../components/Layout";
 import getCommerce from "../../utils/commerce";
@@ -56,11 +58,13 @@ export default function Product(props) {
       <Slide direction="down" in={true}>
         <Grid container sapcing={1}>
           <Grid item md={6}>
-            <img
-              src={product.image.url}
-              alt={product.name}
-              className={classes.largeImage}
-            />
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                alt={product.name}
+                image={product.image.url}
+              />
+            </CardActionArea>
           </Grid>
           <Grid item md={6} xs={12}>
             <List>

@@ -21,13 +21,13 @@ import {
   CART_RETRIEVE_REQUEST,
   CART_RETRIEVE_SUCCESS,
 } from "../../utils/constants";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { AddShoppingCart } from "@mui/icons-material";
 
 export default function Product(props) {
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
-
+  const router = useRouter();
   const classes = useStyles();
 
   const { state, dispatch } = useContext(Store);
@@ -43,11 +43,11 @@ export default function Product(props) {
         Quantity: quantity,
       });
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
-      Router.push("/cart");
+      router.push("/cart");
     } else {
       const cartData = await commerce.cart.add(product.id, quantity);
       dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
-      Router.push("/cart");
+      router.push("/cart");
     }
   };
 

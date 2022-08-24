@@ -12,6 +12,7 @@ import {
   CircularProgress,
   Badge,
   IconButton,
+  Grid,
 } from "@mui/material";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
@@ -43,11 +44,10 @@ export default function Layout({
       dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData });
     };
     fetchCart();
-    // }, []);
   }, []);
 
   return (
-    <React.StrictMode>
+    <React.Fragment>
       <>
         <Head>
           <meta charSet="utf-8" />
@@ -66,50 +66,37 @@ export default function Layout({
             elevation={10}
             className={classes.appBar}
           >
-            <Toolbar className={classes.toolbar}>
-              <NextLink href="/">
-                <Link
-                  variant="h5"
-                  color="inherit"
-                  noWrap
-                  href="/"
-                  className={`${classes.toolbarTitle} ${classes.flexAppbar}`}
-                >
-                  <Image src={logo} alt="logo" width="50px" height="60px" />
-                  BookShop
-                </Link>
-              </NextLink>
-              <nav>
-                <NextLink href="/cart">
-                  <Link
-                    variant="h6"
-                    color="inherit"
-                    href="/cart"
-                    className={classes.link}
-                  >
-                    {cart.loading ? (
-                      <CircularProgress />
-                    ) : cart.data?.total_items > 0 ? (
-                      <IconButton
-                        component={Link}
-                        to="/cart"
-                        aria-label="Show cart items"
-                        color="inherit"
-                      >
-                        <Badge
-                          badgeContent={cart.data?.total_items}
-                          color="primary"
-                        >
-                          <ShoppingCartTwoToneIcon />
-                        </Badge>
-                      </IconButton>
-                    ) : (
-                      <ShoppingCartTwoToneIcon />
-                    )}
-                  </Link>
+            <Grid container spacing={1} className={classes.flexFooter}>
+              <Grid item xs={6} md={5} className={classes.flexAppbar}>
+                <Image src={logo} alt="logo" width="50px" height="60px" />
+                <NextLink href="/">
+                  <h2>BookShop</h2>
                 </NextLink>
-              </nav>
-            </Toolbar>
+              </Grid>
+              <Grid item xs={6} md={5} textAlign="right">
+                <NextLink href="/cart">
+                  {cart.loading ? (
+                    <CircularProgress />
+                  ) : cart.data?.total_items > 0 ? (
+                    <IconButton
+                      component={Link}
+                      to="/cart"
+                      aria-label="Show cart items"
+                      color="inherit"
+                    >
+                      <Badge
+                        badgeContent={cart.data?.total_items}
+                        color="primary"
+                      >
+                        <ShoppingCartTwoToneIcon />
+                      </Badge>
+                    </IconButton>
+                  ) : (
+                    <ShoppingCartTwoToneIcon />
+                  )}
+                </NextLink>
+              </Grid>
+            </Grid>
           </AppBar>
           <Container component="main" className={classes.main}>
             {children}
@@ -119,6 +106,6 @@ export default function Layout({
           </Box>
         </ThemeProvider>
       </>
-    </React.StrictMode>
+    </React.Fragment>
   );
 }

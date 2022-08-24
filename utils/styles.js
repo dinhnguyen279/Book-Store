@@ -39,8 +39,6 @@ export const theme = createTheme({
 export const useStyles = makeStyles((theme) => ({
   appBar: {
     borderBottom: `1px solid ${theme.divider}`,
-    display: "flex",
-    justifyContent: "space-between",
   },
   toolbar: {
     flexWrap: "wrap",
@@ -51,11 +49,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   link: {
     margin: "1rem",
-    justifyContent: "space-between",
   },
   main: {
     padding: "2rem",
-    paddingTop: "8rem",
+    paddingTop: "4rem",
   },
   largeImage: {
     maxWidth: "40rem",

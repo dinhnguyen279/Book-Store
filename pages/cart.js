@@ -29,12 +29,12 @@ import {
   CART_RETRIEVE_REQUEST,
   CART_RETRIEVE_SUCCESS,
 } from "../utils/constants";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 function Cart(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
-
+  const router = useRouter();
   const handlerRemoveFromCart = async (lineItem) => {
     const commerce = getCommerce(props.commercePublicKey);
     const cartData = await commerce.cart.remove(lineItem.id);
@@ -50,7 +50,7 @@ function Cart(props) {
   };
 
   const processToCheckoutHandler = () => {
-    Router.push("/checkout");
+    router.push("/checkout");
   };
   return (
     <Layout title="Cart" commercePublicKey={props.commercePublicKey}>

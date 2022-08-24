@@ -17,12 +17,9 @@ import {
 import Layout from "../../components/Layout";
 import getCommerce from "../../utils/commerce";
 import React, { useContext, useState } from "react";
-import { useStyles } from "../../utils/styles";
+// import { useStyles } from "../../utils/styles";
 import { Store } from "../../components/Store";
-import {
-  CART_RETRIEVE_REQUEST,
-  CART_RETRIEVE_SUCCESS,
-} from "../../utils/constants";
+import { CART_RETRIEVE_SUCCESS } from "../../utils/constants";
 import Router, { useRouter } from "next/router";
 import { AddShoppingCart } from "@mui/icons-material";
 
@@ -30,7 +27,7 @@ export default function Product(props) {
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
@@ -48,7 +45,7 @@ export default function Product(props) {
       router.push("/cart");
     } else {
       const cartData = await commerce.cart.add(product.id, quantity);
-      dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
+      dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
       router.push("/cart");
     }
   };

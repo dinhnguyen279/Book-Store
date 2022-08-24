@@ -25,16 +25,14 @@ import Layout from "../components/Layout";
 import { Store } from "../components/Store";
 import getCommerce from "../utils/commerce";
 import { useStyles } from "../utils/styles";
-import {
-  CART_RETRIEVE_REQUEST,
-  CART_RETRIEVE_SUCCESS,
-} from "../utils/constants";
+import { CART_RETRIEVE_SUCCESS } from "../utils/constants";
 import Router, { useRouter } from "next/router";
 function Cart(props) {
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const router = useRouter();
+
   const handlerRemoveFromCart = async (lineItem) => {
     const commerce = getCommerce(props.commercePublicKey);
     const cartData = await commerce.cart.remove(lineItem.id);
@@ -44,9 +42,9 @@ function Cart(props) {
   const quantityChangeHandler = async (lineItem, quantity) => {
     const commerce = getCommerce(props.commercePublicKey);
     const cartData = await commerce.cart.update(lineItem.id, {
-      Quantity: quantity,
+      quantity,
     });
-    dispatch({ type: CART_RETRIEVE_REQUEST, payload: cartData.cart });
+    dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
   };
 
   const processToCheckoutHandler = () => {
@@ -119,7 +117,7 @@ function Cart(props) {
                 </TableContainer>
               </Grid>
               <Grid item md={3} xs={12}>
-                <Card className={classes.card}>
+                <Card>
                   <List>
                     <ListItem>
                       <Grid container>

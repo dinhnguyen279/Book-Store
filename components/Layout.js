@@ -1,33 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react"; // { useContext, useEffect }
-import {
-  // CssBaseline,
-  ThemeProvider,
-  // AppBar,
-  // Toolbar,
-  // Link,
-  Container,
-  Box,
-  // Typography,
-  // CircularProgress,
-  // Badge,
-  // IconButton,
-  // Grid,
-} from "@mui/material";
+import React from "react";
+import { ThemeProvider, Container, Box } from "@mui/material";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
-// import NextLink from "next/link";
-// import Image from "next/image";
-// import getCommerce from "../utils/commerce";
-// import { Store } from "./Store";
-// import {
-//   CART_RETRIEVE_REQUEST,
-//   CART_RETRIEVE_SUCCESS,
-// } from "../utils/constants";
-// import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
+
 import Footer from "./Footer/footer";
 import Navbar from "./Navbar/navbar";
-// import logo from "../public/assets/logoNguyen.png";
 
 export default function Layout({
   children,

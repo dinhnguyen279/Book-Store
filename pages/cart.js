@@ -4,7 +4,6 @@ import {
   Card,
   Typography,
   Slide,
-  Link,
   Alert,
   CircularProgress,
   TableContainer,
@@ -19,6 +18,7 @@ import {
   List,
   ListItem,
 } from "@mui/material";
+import Link from "next/link";
 import { useContext } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../components/Layout";

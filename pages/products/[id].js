@@ -37,7 +37,7 @@ export default function Product(props) {
     const lineItem = cart.data?.line_items.find(
       (x) => x.product_id === product.id
     );
-    if (lineItem === undefined) {
+    if (lineItem) {
       const cartData = await commerce.cart.update(lineItem.id, {
         Quantity: quantity,
       });

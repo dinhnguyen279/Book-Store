@@ -7,7 +7,6 @@ import {
 
 export const Store = createContext();
 
-// function reducer(state, action) {
 const reducer = (state, action) => {
   switch (action.type) {
     case CART_RETRIEVE_REQUEST:

@@ -178,6 +178,12 @@ export async function getServerSideProps({ params }) {
   const product = await commerce.products.retrieve(id, {
     type: "permalink",
   });
+  // const data = await id.json();
+  // if (!data) {
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
   return {
     props: {
       product,

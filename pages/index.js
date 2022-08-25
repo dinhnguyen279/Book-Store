@@ -7,6 +7,7 @@ import {
   Box,
   Slide,
   Alert,
+  CardActionArea,
   // CardActions,
   // Button,
 } from "@mui/material";
@@ -21,9 +22,7 @@ export default function Home(props) {
   // const addToCartHandler = () => Router.push("/cart");
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
-      {products.lenght === 0 && (
-        <Alert severity="error">No product found</Alert>
-      )}
+      {props.lenght === 0 && <Alert severity="error">No product found</Alert>}
       <Grid container spacing={1}>
         {products.map((pro) => (
           <Grid key={pro.id} item md={4} xs={12} px={2} py={6}>
@@ -36,29 +35,29 @@ export default function Home(props) {
                     query: { id: pro.permalink },
                   }}
                 >
-                  <CardContent>
+                  <CardActionArea>
                     <CardMedia
                       component="img"
                       alt={pro.name}
                       image={pro.image.url}
                     />
-                  </CardContent>
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant="body2"
+                        color="green"
+                        component="p"
+                      >
+                        {pro.name}
+                      </Typography>
+                      <Box>
+                        <Typography variant="h2" color="Red" component="p">
+                          {pro.price.formatted_with_symbol}
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </CardActionArea>
                 </Link>
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="body2"
-                    color="green"
-                    component="p"
-                  >
-                    {pro.name}
-                  </Typography>
-                  <Box>
-                    <Typography variant="h2" color="Red" component="p">
-                      {pro.price.formatted_with_symbol}
-                    </Typography>
-                  </Box>
-                </CardContent>
                 {/* <CardActions>
                   <Button
                     type="button"

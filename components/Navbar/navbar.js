@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import {
-  CssBaseline,
   AppBar,
-  Link,
+  // Link,
   CircularProgress,
   Badge,
   IconButton,
@@ -15,7 +14,7 @@ import {
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import logo from "../../public/assets/logoNguyen.png";
 import Image from "next/image";
-import NextLink from "next/link";
+import Link from "next/link";
 import getCommerce from "../../utils/commerce";
 import { useStyles } from "../../utils/styles";
 import { Store } from "../Store";
@@ -35,7 +34,6 @@ const Navbar = ({ commercePublicKey }) => {
   }, []);
   return (
     <>
-      <CssBaseline />
       <AppBar
         position="static"
         color="secondary"
@@ -45,17 +43,17 @@ const Navbar = ({ commercePublicKey }) => {
         <Grid container spacing={1} className={classes.flexFooter}>
           <Grid item xs={6} md={5} className={classes.flexAppbar}>
             <Image src={logo} alt="logo" width="50px" height="60px" />
-            <NextLink href="/">
+            <Link href="/">
               <h2>BookShop</h2>
-            </NextLink>
+            </Link>
           </Grid>
           <Grid item xs={6} md={5} textAlign="right">
-            <NextLink href="/cart">
+            <Link href="/cart">
               {cart.loading ? (
                 <CircularProgress />
               ) : cart.data?.total_items > 0 ? (
                 <IconButton
-                  component={Link}
+                  // component={Link}
                   to="/cart"
                   aria-label="Show cart items"
                   color="inherit"
@@ -67,7 +65,7 @@ const Navbar = ({ commercePublicKey }) => {
               ) : (
                 <ShoppingCartTwoToneIcon />
               )}
-            </NextLink>
+            </Link>
           </Grid>
         </Grid>
       </AppBar>

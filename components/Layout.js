@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import { ThemeProvider, Container, Box } from "@mui/material";
+import { ThemeProvider, Container, Box, CssBaseline } from "@mui/material";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
 
@@ -20,18 +20,19 @@ export default function Layout({
         <Head>
           <meta charSet="utf-8" />
           <title>{`${title} - Book Store`}</title>
-          {/* <link rel="icon" href={logo} /> */}
+          <link rel="icon" href="/favicon.ico" />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1,shrink-to-fit=no"
           />
         </Head>
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Navbar component="navbar" commercePublicKey={commercePublicKey} />
           <Container component="main" className={classes.main}>
             {children}
           </Container>
-          <Box mt={5}>
+          <Box mt={3}>
             <Footer component="footer" />
           </Box>
         </ThemeProvider>

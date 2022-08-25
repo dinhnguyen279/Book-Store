@@ -24,11 +24,12 @@ import dynamic from "next/dynamic";
 import Layout from "../components/Layout";
 import { Store } from "../components/Store";
 import getCommerce from "../utils/commerce";
-import { useStyles } from "../utils/styles";
+// import { useStyles } from "../utils/styles";
 import { CART_RETRIEVE_SUCCESS } from "../utils/constants";
 import Router, { useRouter } from "next/router";
+import { ArrowBack } from "@mui/icons-material";
 function Cart(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const router = useRouter();
@@ -52,6 +53,9 @@ function Cart(props) {
   };
   return (
     <Layout title="Cart" commercePublicKey={props.commercePublicKey}>
+      <Button href="/" startIcon={<ArrowBack />}>
+        Back Home Page
+      </Button>
       {cart.loading ? (
         <CircularProgress />
       ) : cart.data?.line_items.length === 0 ? (
@@ -65,7 +69,7 @@ function Cart(props) {
           </Typography>
           <Slide direction="up" in={true}>
             <Grid container spacing={1}>
-              <Grid item xs={9}>
+              <Grid item xs={9} md={12}>
                 <TableContainer>
                   <Table aria-label="Orders">
                     <TableHead>

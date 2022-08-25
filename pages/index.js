@@ -1,21 +1,19 @@
 import {
   Grid,
   Card,
-  CardActionArea,
   CardMedia,
   CardContent,
   Typography,
   Box,
   Slide,
-  // Link,
   Alert,
-  Button,
   // CardActions,
   // Button,
 } from "@mui/material";
 import Layout from "../components/Layout";
 import getCommerce from "../utils/commerce";
-import NextLink from "next/link";
+import Link from "next/link";
+
 // import { AddShoppingCart } from "@mui/icons-material";
 // import Router from "next/router";
 export default function Home(props) {
@@ -28,18 +26,24 @@ export default function Home(props) {
       )}
       <Grid container spacing={1}>
         {products.map((pro) => (
-          <Grid key={pro.id} item md={4} xs={6} px={2} py={2}>
+          <Grid key={pro.id} item md={4} xs={12} px={2} py={6}>
             <Slide direction="up" in={true}>
               <Card variant="elevation">
-                <NextLink href={`/products/${pro.permalink}`}>
-                  <CardActionArea>
+                {/* <Link href={`/products/${pro.permalink}`}> */}
+                <Link
+                  href={{
+                    pathname: "/products/[id]",
+                    query: { id: pro.permalink },
+                  }}
+                >
+                  <CardContent>
                     <CardMedia
                       component="img"
                       alt={pro.name}
                       image={pro.image.url}
                     />
-                  </CardActionArea>
-                </NextLink>
+                  </CardContent>
+                </Link>
                 <CardContent>
                   <Typography
                     gutterBottom

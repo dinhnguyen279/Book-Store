@@ -21,7 +21,7 @@ import React, { useContext, useState } from "react";
 import { Store } from "../../components/Store";
 import { CART_RETRIEVE_SUCCESS } from "../../utils/constants";
 import Router, { useRouter } from "next/router";
-import { AddShoppingCart } from "@mui/icons-material";
+import { AddShoppingCart, ArrowBack } from "@mui/icons-material";
 
 export default function Product(props) {
   const { product } = props;
@@ -37,7 +37,7 @@ export default function Product(props) {
     const lineItem = cart.data?.line_items.find(
       (x) => x.product_id === product.id
     );
-    if (lineItem) {
+    if (lineItem === undefined) {
       const cartData = await commerce.cart.update(lineItem.id, {
         Quantity: quantity,
       });
@@ -53,7 +53,7 @@ export default function Product(props) {
   return (
     <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
       <Slide direction="down" in={true}>
-        <Grid container sapcing={1}>
+        <Grid container spacing={1}>
           <Grid item md={6}>
             <CardActionArea>
               <CardMedia
@@ -160,6 +160,11 @@ export default function Product(props) {
                 )}
               </List>
             </Card>
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <Button href="/" startIcon={<ArrowBack />}>
+              Back Home Page
+            </Button>
           </Grid>
         </Grid>
       </Slide>

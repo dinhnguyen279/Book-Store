@@ -11,7 +11,6 @@ import {
   CART_RETRIEVE_SUCCESS,
 } from "../../utils/constants";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
-import logo from "../../public/assets/logoNguyen.png";
 import Image from "next/image";
 import Link from "next/link";
 import getCommerce from "../../utils/commerce";
@@ -41,7 +40,7 @@ const Navbar = ({ commercePublicKey }) => {
       >
         <Grid container spacing={1} className={classes.flexFooter}>
           <Grid item xs={6} md={5} className={classes.flexAppbar}>
-            <Image src={logo} alt="logo" width="50px" height="60px" />
+            {/* <Image src={logo} alt="logo" width="50px" height="60px" /> */}
             <Link href="/">
               <h2>BookShop</h2>
             </Link>

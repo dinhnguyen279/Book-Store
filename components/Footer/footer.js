@@ -41,11 +41,7 @@ const Footer = () => {
               </Link>
             </Box>
             <Box className={classes.boxLink} py={1}>
-              <Link
-                href="https://github.com/dinhnguyen279"
-                color="inherit"
-                className={classes.footerLink}
-              >
+              <Link href="/" color="inherit" className={classes.footerLink}>
                 Portfolio
               </Link>
             </Box>
@@ -65,10 +61,10 @@ const Footer = () => {
             </Box>
             <Box className={classes.boxLink} py={1}>
               <EmailTwoToneIcon className={classes.mr1} />
-              tdinhnguyen279@gmail.com
+              bookstore@gmail.com
             </Box>
             <Box className={classes.boxLink} py={1}>
-              <LocalPhoneTwoToneIcon className={classes.mr1} />+ 84 0829954124
+              <LocalPhoneTwoToneIcon className={classes.mr1} />+ 84 01234567891
             </Box>
             <Box className={classes.boxLink} py={1}>
               <HomeTwoToneIcon className={classes.mr1} />
@@ -79,25 +75,17 @@ const Footer = () => {
         <Grid container spacing={1} mt={5} borderTop={1} align="center">
           <Grid item sm={6} xs={12}>
             <Typography variant="body1" color="Background">
-              &copy; {new Date().getFullYear()} Made by DinhNguyen{". "}
+              &copy; {new Date().getFullYear()} Made by Huy&Nhan{". "}
             </Typography>
           </Grid>
           <Grid item sm={6} xs={12}>
-            <Link
-              href="https://www.facebook.com/279.DinhNguyen"
-              color="inherit"
-              marginRight={1}
-            >
+            <Link href="https://facebook.com" color="inherit" marginRight={1}>
               <FacebookTwoToneIcon />
             </Link>
-            <Link
-              href="https://github.com/dinhnguyen279"
-              color="inherit"
-              marginRight={1}
-            >
+            <Link href="https://github.com" color="inherit" marginRight={1}>
               <GitHubIcon />
             </Link>
-            <Link href="" color="inherit" marginRight={1}>
+            <Link href="/" color="inherit" marginRight={1}>
               <AlternateEmailTwoToneIcon />
             </Link>
           </Grid>

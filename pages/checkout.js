@@ -55,22 +55,22 @@ function Checkout(props) {
   };
 
   // Customer details
-  const [firstName, setFirstName] = useState(dev ? "Dinh" : "");
-  const [lastName, setLastName] = useState(dev ? "Nguyen" : "");
-  const [email, setEmail] = useState(dev ? "tdinhnguyen@gmail.com" : "");
+  const [firstName, setFirstName] = useState(dev ? "Quoc Huy" : "");
+  const [lastName, setLastName] = useState(dev ? "Huy" : "");
+  const [email, setEmail] = useState(dev ? "qhuy05@gmail.com" : "");
 
   // Shipping details
-  const [shippingName, setShippingName] = useState(dev ? "Dinh Nguyen" : "");
+  const [shippingName, setShippingName] = useState(dev ? "Quoc Huy" : "");
   const [shippingStreet, setShippingStreet] = useState(
-    dev ? "123 Nguyen Ba Tong" : ""
+    dev ? "123 Be Van Dan" : ""
   );
   // use zip_code tieu bang california
   const [shippingPostalZipCode, setShippingPostalZipCode] = useState(
     dev ? "90001" : ""
   );
-  const [shippingCity, setShippingCity] = useState(dev ? "Tay Ninh" : "");
+  const [shippingCity, setShippingCity] = useState(dev ? "Bac Lieu" : "");
   const [shippingStateProvince, setShippingStateProvince] = useState(
-    dev ? "TN" : ""
+    dev ? "BL" : ""
   );
   const [shippingCountry, setShippingCountry] = useState(dev ? "Viet Nam" : "");
   const [shippingOption, setShippingOption] = useState({});

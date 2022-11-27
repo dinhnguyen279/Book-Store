@@ -310,7 +310,6 @@ function Checkout(props) {
 
             <FormControl className={classes.formControl}>
               <InputLabel id="shippingCountry-label">Country</InputLabel>
-              {/* Chọn quốc gia và update nó vào input  */}
               <Select
                 labelId="shippingCountry-label"
                 id="shippingCountry"
@@ -331,7 +330,6 @@ function Checkout(props) {
               <InputLabel id="shippingStateProvince-label">
                 State / Province
               </InputLabel>
-              {/* Chọn tỉnh thành và update nó vào input  */}
               <Select
                 labelId="shippingStateProvince-label"
                 id="shippingStateProvince"

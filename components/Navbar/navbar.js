@@ -5,12 +5,15 @@ import {
   Badge,
   IconButton,
   Grid,
+  FormControl,
+  Input,
 } from "@mui/material";
 import {
   CART_RETRIEVE_REQUEST,
   CART_RETRIEVE_SUCCESS,
 } from "../../utils/constants";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
+import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
 import Link from "next/link";
 import getCommerce from "../../utils/commerce";
@@ -38,14 +41,62 @@ const Navbar = ({ commercePublicKey }) => {
         elevation={10}
         className={classes.appBar}
       >
-        <Grid container spacing={1} className={classes.flexFooter}>
-          <Grid item xs={6} md={5} className={classes.flexAppbar}>
+        <Grid
+          container={true}
+          spacing={1}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid item xs={4} md={4}>
             {/* <Image src={logo} alt="logo" width="50px" height="60px" /> */}
             <Link href="/">
               <h2>BookShop</h2>
             </Link>
           </Grid>
-          <Grid item xs={6} md={5} textAlign="right">
+          <Grid
+            item
+            xs={4}
+            style={{
+              textAlign: "center",
+              display: "flex",
+              position: "relative",
+            }}
+          >
+            <FormControl
+              fullWidth
+              style={{
+                outline: "none",
+                borderRadius: "100px",
+                background: "white",
+              }}
+            >
+              <Input
+                disableUnderline
+                fullWidth
+                value="Search"
+                style={{
+                  paddingLeft: "1rem",
+                  color: "GrayText",
+                }}
+              >
+                Search
+              </Input>
+            </FormControl>
+            <IconButton
+              style={{
+                position: "absolute",
+                top: "60%",
+                right: "0%",
+                transform: "translate(0,-50%)",
+              }}
+            >
+              <SearchIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs={4} md={4} textAlign="right">
             <Link href="/cart">
               {cart.loading ? (
                 <CircularProgress />

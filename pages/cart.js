@@ -27,7 +27,7 @@ import getCommerce from "../utils/commerce";
 // import { useStyles } from "../utils/styles";
 import { CART_RETRIEVE_SUCCESS } from "../utils/constants";
 import Router, { useRouter } from "next/router";
-import { ArrowBack } from "@mui/icons-material";
+import { ArrowBack, Close } from "@mui/icons-material";
 function Cart(props) {
   // const classes = useStyles();
   const { state, dispatch } = useContext(Store);
@@ -43,7 +43,7 @@ function Cart(props) {
   const quantityChangeHandler = async (lineItem, quantity) => {
     const commerce = getCommerce(props.commercePublicKey);
     const cartData = await commerce.cart.update(lineItem.id, {
-      quantity,
+      quantity: quantity,
     });
     dispatch({ type: CART_RETRIEVE_SUCCESS, payload: cartData.cart });
   };
@@ -109,10 +109,9 @@ function Cart(props) {
                             <Button
                               onClick={() => handlerRemoveFromCart(cartItem)}
                               variant="contained"
-                              color="secondary"
-                            >
-                              x
-                            </Button>
+                              color="error"
+                              endIcon={<Close color="inherit" />}
+                            ></Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -156,5 +155,5 @@ function Cart(props) {
 
 //Dynamic là 1 hàm từ next.js và set srr = false thì trang này sẽ chỉ được hiển thị ở client chứ k có ở BE
 export default dynamic(() => Promise.resolve(Cart), {
-  srr: false,
+  srr: true,
 });

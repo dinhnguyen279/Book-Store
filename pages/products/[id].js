@@ -27,7 +27,6 @@ export default function Product(props) {
   const { product } = props;
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
-  // const classes = useStyles();
 
   const { state, dispatch } = useContext(Store);
   const { cart } = state;

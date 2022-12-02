@@ -8,18 +8,23 @@ import {
   Slide,
   Alert,
   CardActionArea,
-  // CardActions,
-  // Button,
+  ListItem,
+  Button,
 } from "@mui/material";
 import Layout from "../components/Layout";
 import getCommerce from "../utils/commerce";
 import Link from "next/link";
-
-// import { AddShoppingCart } from "@mui/icons-material";
-// import Router from "next/router";
+import { AddShoppingCart } from "@mui/icons-material";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { Store } from "../components/Store";
 export default function Home(props) {
   const { products } = props;
-  // const addToCartHandler = () => Router.push("/cart");
+
+  const router = useRouter();
+  const addToCart = () => {
+    router.push("/cart");
+  };
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
       {props.lenght === 0 && <Alert severity="error">No product found</Alert>}
@@ -58,18 +63,18 @@ export default function Home(props) {
                     </CardContent>
                   </CardActionArea>
                 </Link>
-                {/* <CardActions>
+                <ListItem>
                   <Button
                     type="button"
                     fullWidth
                     variant="contained"
                     color="secondary"
-                    onClick={addToCartHandler}
+                    onClick={addToCart}
                     endIcon={<AddShoppingCart />}
                   >
                     Add To Cart
                   </Button>
-                </CardActions> */}
+                </ListItem>
               </Card>
             </Slide>
           </Grid>

@@ -14,7 +14,7 @@ import {
 } from "../../utils/constants";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import SearchIcon from "@mui/icons-material/Search";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import getCommerce from "../../utils/commerce";
 import { useStyles } from "../../utils/styles";
@@ -33,6 +33,7 @@ const Navbar = ({ commercePublicKey }) => {
     };
     fetchCart();
   }, []);
+
   return (
     <>
       <AppBar
@@ -66,6 +67,7 @@ const Navbar = ({ commercePublicKey }) => {
             }}
           >
             <FormControl
+              id="inputItem"
               fullWidth
               style={{
                 outline: "none",
@@ -76,7 +78,7 @@ const Navbar = ({ commercePublicKey }) => {
               <Input
                 disableUnderline
                 fullWidth
-                value="Search"
+                placeholder="Search..."
                 style={{
                   paddingLeft: "1rem",
                   color: "GrayText",

@@ -38,7 +38,7 @@ export const theme = createTheme({
 });
 export const useStyles = makeStyles((theme) => ({
   appBar: {
-    borderBottom: `1px solid ${theme.divider}`,
+    // borderBottom: `1px solid ${theme.divider}`,
   },
   toolbar: {
     flexWrap: "wrap",

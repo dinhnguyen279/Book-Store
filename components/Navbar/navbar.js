@@ -17,11 +17,9 @@ import SearchIcon from "@mui/icons-material/Search";
 // import Image from "next/image";
 import Link from "next/link";
 import getCommerce from "../../utils/commerce";
-import { useStyles } from "../../utils/styles";
 import { Store } from "../Store";
 
 const Navbar = ({ commercePublicKey }) => {
-  const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   useEffect(() => {
@@ -36,12 +34,7 @@ const Navbar = ({ commercePublicKey }) => {
 
   return (
     <>
-      <AppBar
-        position="static"
-        color="secondary"
-        elevation={10}
-        className={classes.appBar}
-      >
+      <AppBar position="static" color="secondary" elevation={10}>
         <Grid
           container={true}
           spacing={1}
@@ -49,6 +42,7 @@ const Navbar = ({ commercePublicKey }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            padding: "0 20px",
           }}
         >
           <Grid item xs={4} md={4}>
@@ -67,7 +61,6 @@ const Navbar = ({ commercePublicKey }) => {
             }}
           >
             <FormControl
-              id="inputItem"
               fullWidth
               style={{
                 outline: "none",

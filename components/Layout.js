@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { ThemeProvider, Container, Box, CssBaseline } from "@mui/material";
-import { theme, useStyles } from "../utils/styles";
+import { theme } from "../utils/styles";
 import Head from "next/head";
 
 import Footer from "./Footer/footer";
@@ -12,8 +12,6 @@ export default function Layout({
   commercePublicKey,
   title = "CarShop",
 }) {
-  const classes = useStyles();
-
   return (
     <React.Fragment>
       <>
@@ -29,7 +27,13 @@ export default function Layout({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Navbar component="navbar" commercePublicKey={commercePublicKey} />
-          <Container component="main" className={classes.main}>
+          <Container
+            component="main"
+            style={{
+              padding: "2rem",
+              paddingTop: "4rem",
+            }}
+          >
             {children}
           </Container>
           <Box mt={3}>

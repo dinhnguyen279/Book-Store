@@ -11,15 +11,20 @@ import AlternateEmailTwoToneIcon from "@mui/icons-material/AlternateEmailTwoTone
 const Footer = () => {
   const classes = useStyles();
   return (
-    <Box color="white" className={classes.bgFooter}>
+    <Box color="white" style={{ background: "#208080" }}>
       <Container maxWidth="lg">
         <Grid container spacing={5} px={{ xs: 3, sm: 5 }} py={{ xs: 3, sm: 5 }}>
           <Grid item xs={12} sm={4}>
-            <Box borderBottom={1} className={classes.title}>
+            <Box borderBottom={1} style={{ fontSize: "25px" }}>
               <Link
                 href="/"
                 color="inherit"
-                className={`${classes.footerLink} ${classes.flexFooter} `}
+                style={{
+                  textDecoration: "none",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
                 BOOK-STORE
               </Link>
@@ -32,42 +37,129 @@ const Footer = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Box borderBottom={1} className={classes.title}>
+            <Box borderBottom={1} style={{ fontSize: "25px" }}>
               PRODUCTS
             </Box>
-            <Box className={classes.boxLink} py={1}>
-              <Link href="/" color="inherit" className={classes.footerLink}>
+            <Box
+              style={{
+                cursor: "pointer",
+                "&:hover": {
+                  borderBottom: "1px solid white",
+                },
+                display: "flex",
+              }}
+              py={1}
+            >
+              <Link
+                href="/"
+                color="inherit"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 Book-Store
               </Link>
             </Box>
-            <Box className={classes.boxLink} py={1}>
-              <Link href="/" color="inherit" className={classes.footerLink}>
+            <Box
+              style={{
+                cursor: "pointer",
+                "&:hover": {
+                  borderBottom: "1px solid white",
+                },
+                display: "flex",
+              }}
+              py={1}
+            >
+              <Link
+                href="/"
+                color="inherit"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 Portfolio
               </Link>
             </Box>
-            <Box className={classes.boxLink} py={1}>
+            <Box
+              style={{
+                cursor: "pointer",
+                "&:hover": {
+                  borderBottom: "1px solid white",
+                },
+                display: "flex",
+              }}
+              py={1}
+            >
               <Link
                 href="https://www.amazon.com/"
                 color="inherit"
-                className={classes.footerLink}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
                 Amazon
               </Link>
             </Box>
           </Grid>
           <Grid item xs={12} sm={4} py={{ xs: 1, sm: 10 }}>
-            <Box borderBottom={1} className={classes.title}>
+            <Box borderBottom={1} style={{ fontSize: "25px" }}>
               CONTACT
             </Box>
-            <Box className={classes.boxLink} py={1}>
-              <EmailTwoToneIcon className={classes.mr1} />
+            <Box
+              style={{
+                cursor: "pointer",
+                "&:hover": {
+                  borderBottom: "1px solid white",
+                },
+                display: "flex",
+              }}
+              py={1}
+            >
+              <EmailTwoToneIcon
+                style={{
+                  marginRight: "1rem !important",
+                }}
+              />
               bookstore@gmail.com
             </Box>
-            <Box className={classes.boxLink} py={1}>
-              <LocalPhoneTwoToneIcon className={classes.mr1} />+ 84 01234567891
+            <Box
+              style={{
+                cursor: "pointer",
+                "&:hover": {
+                  borderBottom: "1px solid white",
+                },
+                display: "flex",
+              }}
+              py={1}
+            >
+              <LocalPhoneTwoToneIcon
+                style={{
+                  marginRight: "1rem !important",
+                }}
+              />
+              + 84 01234567891
             </Box>
-            <Box className={classes.boxLink} py={1}>
-              <HomeTwoToneIcon className={classes.mr1} />
+            <Box
+              style={{
+                cursor: "pointer",
+                "&:hover": {
+                  borderBottom: "1px solid white",
+                },
+                display: "flex",
+              }}
+              py={1}
+            >
+              <HomeTwoToneIcon
+                style={{
+                  marginRight: "1rem !important",
+                }}
+              />
               Hồ Chí Minh, Việt Nam
             </Box>
           </Grid>
